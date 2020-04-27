@@ -1,0 +1,1 @@
+ ffmpeg -framerate 1/2.5 -i %d.jpeg -s 1920x1280 -r 25 -pix_fmt yuv420p out.mp4
