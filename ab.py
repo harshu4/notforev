@@ -23,3 +23,14 @@ myobj = gTTS(text=mytext, lang=language, slow=False)
 # welcome  
 myobj.save("welcome.mp3") 
   
+
+ ffmpeg_filter = "-filter_complex " \
+                                "[0:a]volume=1[a0];[1:a]volume={music_volume}[a1];" \
+                                "[a1]atrim=start={music_start}[a1];" \
+                                "[a0][a1]amix=inputs=2:duration=shortest:dropout_transition=3[a]" \
+                                " -map \"[a]\" -f mp3".format(music_start=music_time_start,
+                                                              music_volume=music_volume)
+ ff_inputs = {
+        "pipe:0": None,
+         music_path: None
+}
