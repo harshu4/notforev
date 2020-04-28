@@ -26,7 +26,7 @@ sys.exit()
 mytext = open('horr.txt','r').read()
 myobj = gTTS(text=mytext, lang='hi', slow=False) 
 myobj.save("./temp/welcome.mp3")
-num = random.randint(0,0)
+num = random.randint(0,12)
 os.system('ffmpeg -i ./temp/welcome.mp3 -i res/sound{}.mp3 -filter_complex "[0:a]volume=1[a0]; [1:a]volume=0.2[a1]; [a0][a1]amix=inputs=2:duration=shortest" ./temp/output.mp3'.format(str(num)))
 os.system('sox ./temp/output.mp3 ./temp/oyee.mp3  speed 1.1 pitch -100 gain -10')
 images=os.popen("cd res && ls | grep .jpg").readlines()
@@ -64,7 +64,7 @@ subprocess.Popen(cmd).wait()
 #merge intro and outro
 os.system(f'ffmpeg -i {intro_file} -i {mid_out_file} -i {outro_file} -filter_complex "[0:v]scale=1920x1280,setdar=16/9[v0]; [1:v]scale=1920x1280,setdar=16/9[v1]; [2:v]scale=1920x1280,setdar=16/9[v2]; [v0][0:a][v1][1:a][v2][2:a]concat=n=3:v=1:a=1"  {final_file}')
 
-clinet.horror.stories.delete_many({"title":story_obj['title']})
+client.horror.stories.delete_many({"title":story_obj['title']})
 print("\n\nOutput genrated at ./output/yt.mp4")
 
 
